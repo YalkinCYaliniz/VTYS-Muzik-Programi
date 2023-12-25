@@ -100,7 +100,7 @@ def createDB():
 	                    yazarID INTEGER PRIMARY KEY,
 	                    ensturmanAdi VARCHAR(255),
                         CONSTRAINT yazarID FOREIGN KEY (yazarID)
-	                  REFERENCES ensturman(yazarID)
+	                  REFERENCES katkida_bulunan(yazarID)
 	                  ON DELETE CASCADE
 	                  ON UPDATE CASCADE
                   );""")
@@ -109,7 +109,7 @@ def createDB():
 	                    yazarID INTEGER PRIMARY KEY,
 	                    calistigiSirket VARCHAR(50) NOT NULL,
                         CONSTRAINT yazarID FOREIGN KEY (yazarID)
-	                    REFERENCES produktor(yazarID)
+	                    REFERENCES katkida_bulunan(yazarID)
 	                    ON DELETE CASCADE
 	                    ON UPDATE CASCADE
                     );""")
@@ -272,7 +272,7 @@ BEGIN
         WHEN k.hesapTuru = 'p' THEN
             (SELECT p.fiyat FROM premium p WHERE p.kullaniciid = kullanici_id)
         WHEN k.hesapTuru = 's' THEN
-            (SELECT s.gecilenReklam as GecilenReklam FROM standart s WHERE s.kullaniciid= kullanici_id)
+            (SELECT s.gecilenReklam FROM standart s WHERE s.kullaniciid= kullanici_id)
     END
     FROM kullanici k WHERE k.kullaniciid = kullanici_id;
 
